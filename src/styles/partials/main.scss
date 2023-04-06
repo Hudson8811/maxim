@@ -134,6 +134,13 @@ p {
 
 
 .hero {
+	min-height: calc(100vh - 256px);
+	@media (max-width: 1920px){
+		min-height: calc(100vh - 13.33vw);
+	}
+	@media (max-width: 768px){
+		min-height: 100%;
+	}
 	&__container {
 		max-width: 1300px;
 		display: flex;

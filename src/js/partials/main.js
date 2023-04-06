@@ -26,3 +26,14 @@ var content__body_wrapper = new Swiper(".content__body-wrapper", {
 	swiper: content__tabs,
 	},
 });
+
+
+
+
+
+$(document).ready(function() { 
+	$(window).load(function() { 
+
+
+	});
+});
