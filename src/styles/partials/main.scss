@@ -361,13 +361,6 @@ p {
 
 
 .content {
-	padding-bottom: 300px;
-	@media (max-width: 1920px){
-		padding-bottom: 15.63vw;
-	}
-	@media (max-width: 768px){
-		padding-bottom: 37.50vw;
-	}
 	&__tabs {
 		display: flex;
 		justify-content: space-between;
@@ -921,6 +914,68 @@ p {
 		}
 	}
 }
+
+.bottom{
+	text-align: center;
+	padding: 108px 0 80px;
+
+	@media (max-width: 1920px){
+		padding: vw(108) 0 vw(80);
+	}
+	@media (max-width: 768px){
+		padding: vw2(115) 0 vw2(130);
+	}
+	&__top{
+		font-family: 'Geometria';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.6);
+	}
+	&__center{
+		padding: 18px 0 36px;
+	}
+	&__bottom{
+		font-family: 'Geometria';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 20px;
+		line-height: 25px;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.6);
+	}
+}
+.share{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&__btn{
+		border-radius: 50%;
+		overflow: hidden;
+		cursor: pointer;
+		border: none;
+		background-color: #ffffff;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+		margin: 0 7px;
+		width: 31px;
+		height: 31px;
+		&.vk{
+			background-image: url("../images/vk.svg");
+		}
+		&.ok{
+			background-image: url("../images/ok.svg");
+		}
+		&.tl{
+			background-image: url("../images/tl.svg");
+		}
+	}
+}
+
+
 @keyframes elipsSolo {
 	0% {
 		transform: translate(-50%, -40%) rotate(45deg);
