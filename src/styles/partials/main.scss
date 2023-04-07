@@ -1,8 +1,23 @@
+body{
+	background: black;
+}
 .wrapper {
-	background: url('../images/bg.png') center / cover no-repeat;
 	min-height: 100%;
-	@media (max-width: 768px){
-		background: url('../images/bg-mob.png') center / cover no-repeat;
+	position: relative;
+	z-index: 3;
+}
+.backgound-video{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	video{
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
 	}
 }
 .title-big {
@@ -110,6 +125,7 @@ p {
 		min-height: 65px;
 		width: 262px;
 		height: 65px;
+		display: block;
 		@media (max-width: 1920px){
 			margin-left: 4.17vw;
 			min-width: 13.65vw;
@@ -234,21 +250,29 @@ p {
 		justify-content: center;
 		align-items: center;
 		position: relative;
+		pointer-events: none;
 		@media (max-width: 768px){
 			margin-top: 7vw;
 			margin-bottom: 3vw;
 			padding-top: 10.25vw;
 			padding-bottom: 12.38vw;
+			flex: 1 1 100%;
+			width: 100%;
 		}
 		&::before{
 			content:'';
 			position: absolute;
-			top: 40%;
+			top: 0;
 			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 150%;
-			height: 110%;
-			background: url('../images/ellipses1.svg') center / 100% 100% no-repeat;
+			bottom: 0;
+			width: 2px;
+			background-color: #ffffff;
+			@media (max-width: 1920px){
+				width: 0.05vw;
+			}
+			@media (max-width: 768px){
+				width: 0.25vw;
+			}
 		}
 		&::after{
 			content:'';
@@ -262,12 +286,56 @@ p {
 				width: 0.05vw;
 			}
 			@media (max-width: 768px){
-				width: 0.25vw;
-				left: 50%;
+				display: none;
+			}
+		}
+	}
+	&__circles{
+		z-index: 2;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+	&__circle{
+		display: block;
+		max-width: 100%;
+		position: absolute;
+		z-index: 1;
+		left: 50%;
+		&--1{
+			width: 543px;
+			top: 12px;
+			transform: translateX(-51.5%);
+			animation: elipsUp 5s ease-in-out  infinite;
+			@media (max-width: 1920px){
+				width: vw(543);
+				top: vw(12);
+			}
+			@media (max-width: 768px){
+				width: vw2(543);
+				top: vw2(12);
+			}
+		}
+		&--2{
+			width: 598px;
+			bottom: 38px;
+			transform: translateX(-46%);
+			animation: elipsDown 5s ease-in-out infinite;
+			@media (max-width: 1920px){
+				width: vw(598);
+				bottom: vw(38);
+			}
+			@media (max-width: 768px){
+				width: vw2(598);
+				bottom: vw2(38);
 			}
 		}
 	}
 	&__swiper {
+		position: relative;
+		z-index: 3 !important;
 		max-width: 430px;
 		@media (max-width: 1920px){
 			max-width: 22.40vw;
@@ -282,6 +350,10 @@ p {
 		display: block;
 		overflow: hidden;
 		border-radius: 50%;
+		border: 2px solid #FFFFFF;
+		box-sizing: border-box;
+		pointer-events: none;
+		user-select: none;
 	}
 }
 
@@ -569,7 +641,8 @@ p {
 				width: 427px;
 				height: 231px;
 				transform: translate(-50%, -50%) rotate(45deg);
-				background: url('../images/ellipse-along.svg') 0 0 / 100% 100% no-repeat;
+				background: url('../images/elips_content.png') 0 0 / 100% 100% no-repeat;
+				animation: elipsSolo 6s ease-in-out  infinite;
 				@media (max-width: 1920px){
 					width: 22.24vw;
 					height: 12.03vw;
@@ -579,6 +652,7 @@ p {
 					width: 82.63vw;
 					height: 44.88vw;
 					transform: translate(-32.50vw, -50%) rotate(40deg);
+					animation: elipsSolo2 6s ease-in-out  infinite;
 				}
 			}
 		}
@@ -690,6 +764,8 @@ p {
 			min-width: 282px;
 			min-height: 282px;
 			border-radius: 50%;
+			border: 2px solid #FFFFFF;
+			box-sizing: border-box;
 			overflow: hidden;
 			@media (max-width: 1920px){
 				width: 14.69vw;
@@ -753,6 +829,12 @@ p {
 		color: #FFFFFF;
 		border: 2px solid #FFFFFF;
 		border-radius: 23px;
+		transition: 0.3s background-color, 0.3s color, 0.3s border-color;
+		&:hover{
+			background-color: #ffffff;
+			color: #af1717;
+			border-color: #af1717;
+		}
 		@media (max-width: 1920px){
 			width: 11.98vw;
 			height: 4.17vw;
@@ -762,7 +844,6 @@ p {
 			line-height: 1.30vw;
 			border: 0.10vw solid #FFFFFF;
 			border-radius: 1.20vw;
-
 		}
 		@media (max-width: 768px){
 			width: 28.75vw;
@@ -799,6 +880,9 @@ p {
 				width: 2.38vw;
 				height: 2.13vw;
 			}
+			&:nth-child(2){
+				display: none;
+			}
 		}
 		span {
 			margin-left: 15px;
@@ -827,22 +911,58 @@ p {
 		&.clicked{
 			cursor: default;
 			img{
-				animation: zoom 1s ease-in-out;
-				animation-fill-mode: forwards;
+				&:nth-child(1){
+					display: none;
+				}
+				&:nth-child(2){
+					display: block;
+				}
 			}
 		}
 	}
 }
-
-
-@keyframes zoom {
+@keyframes elipsSolo {
 	0% {
-		transform: scale(1);
+		transform: translate(-50%, -40%) rotate(45deg);
 	}
 	50% {
-		transform: scale(1.4);
+		transform: translate(-50%, -60%) rotate(45deg)
 	}
 	100% {
-		transform: scale(1);
+		transform: translate(-50%, -40%) rotate(45deg);
+	}
+}
+@keyframes elipsSolo2 {
+	0% {
+		transform: translate(-32.50vw, -40%) rotate(40deg);
+	}
+	50% {
+		transform: translate(-32.50vw, -60%) rotate(40deg)
+	}
+	100% {
+		transform: translate(-32.50vw, -40%) rotate(40deg);
+	}
+}
+
+@keyframes elipsUp {
+	0% {
+		transform: translateY(0) translateX(-51.5%);
+	}
+	50% {
+		transform: translateY(40%) translateX(-51.5%);
+	}
+	100% {
+		transform: translateY(0) translateX(-51.5%);
+	}
+}
+@keyframes elipsDown {
+	0% {
+		transform: translateY(0) translateX(-46%);
+	}
+	50% {
+		transform: translateY(-50%) translateX(-46%);
+	}
+	100% {
+		transform: translateY(0) translateX(-46%);
 	}
 }

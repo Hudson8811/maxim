@@ -13,15 +13,19 @@ $(document).ready(function() {
             $(".hero__swiper .swiper-wrapper").html(html);
 
             heroSlider = new Swiper(".hero__swiper", {
+                speed: 750,
                 autoplay: {
                     delay: 5000,
                     disableOnInteraction: false,
                 },
                 loop: true,
                 effect: 'fade',
+                noSwiping: true,
+                allowTouchMove: false,
                 fadeEffect: {
                     crossFade: true
                 },
+                simulateTouch: false
             });
         } catch (e) {
             console.error('Полученные данные не являются валидным JSON');
@@ -41,7 +45,7 @@ $(document).ready(function() {
                                 <div class="item-content__name">%title%</div> \
                                 <p class="item-content__text">%text%</p><a class="item-content__read-btn" href="%link%" target="_blank"> \
                                 ЧИТАТЬ ИСТОРИЮ</a> \
-                                <div class="item-content__like" data-id="%id%"> <img src="images/like.svg" alt="alt"><span>%likes%</span></div> \
+                                <div class="item-content__like" data-id="%id%"> <img src="images/like-empty.svg" alt="alt"><img src="images/like.svg" alt="alt"><span>%likes%</span></div> \
                                 </div> \
                                 <div class="item-content__image"> <img src="%image%" alt="alt"></div> \
                                 </div> \
@@ -110,6 +114,7 @@ $(document).ready(function() {
                 thumbs: {
                     swiper: contentTabs,
                 },
+                autoHeight: true
             });
 
         } catch (e) {
@@ -139,6 +144,13 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+
+    $(document).on('click','.content__tab',function (){
+        $('html, body').stop().animate({
+            scrollTop: $('#content').offset().top
+        }, 400);
     });
 });
 
