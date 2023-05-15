@@ -1,4 +1,4 @@
-var heroSlider, contentTabs, contentInfo;
+var heroSlider, contentTabs, contentInfo, tabsNames = [], lastInited = null;
 
 $(document).ready(function() {
     $.getJSON('/get_photos/', function(data) {
@@ -84,6 +84,7 @@ $(document).ready(function() {
                     heroHtml = heroHtml.replace('%likes%', hero.likes);
                     heroHtml = heroHtml.replace('%id%', hero.id);
                     herosHtml += heroHtml;
+
                 });
 
                 let html = htmlTemplate;
@@ -98,7 +99,10 @@ $(document).ready(function() {
 
                 $(".content__tabs .swiper-wrapper").append(htmlTab);
                 $(".content__body-wrapper .swiper-wrapper").append(html);
+
+                tabsNames.push(value.name);
             });
+
 
 
             contentTabs = new Swiper(".content__tabs", {
@@ -114,13 +118,33 @@ $(document).ready(function() {
                 thumbs: {
                     swiper: contentTabs,
                 },
-                autoHeight: true
+                autoHeight: true,
+                loop: true,
+                navigation: {
+                    nextEl: '.arrows__item--next',
+                    prevEl: '.arrows__item--prev',
+                },
+                on: {
+                    slideChange: function (swiper) {
+                        getPrevAndNext(tabsNames, swiper.realIndex);
+                        if (lastInited !== swiper.realIndex && lastInited !== null){
+                            $('html, body').stop().animate({
+                                scrollTop: $('#content').offset().top
+                            },400);
+                        } else {
+                            lastInited = swiper.realIndex;
+                        }
+                    },
+                },
             });
 
         } catch (e) {
             console.error('Полученные данные не являются валидным JSON');
         }
     });
+
+
+
 
     $(document).on('click','.item-content__like',function (){
         event.preventDefault();
@@ -152,5 +176,14 @@ $(document).ready(function() {
             scrollTop: $('#content').offset().top
         }, 400);
     });
+
+
+    function getPrevAndNext(tabsNames, currentIndex) {
+        var prevIndex = (currentIndex === 0) ? tabsNames.length - 1 : currentIndex - 1;
+        var nextIndex = (currentIndex === tabsNames.length - 1) ? 0 : currentIndex + 1;
+        $('.arrows__item--prev span').text(tabsNames[prevIndex]);
+        $('.arrows__item--next span').text(tabsNames[nextIndex]);
+        return false;
+    }
 });
 

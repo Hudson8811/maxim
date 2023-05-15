@@ -1391,6 +1391,121 @@ p a {
   background-image: url("../images/tl.svg");
 }
 
+.arrows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0 15px;
+  pointer-events: none;
+}
+@media (max-width: 1920px) {
+  .arrows {
+    padding: 0 0.78125vw;
+  }
+}
+@media (max-width: 768px) {
+  .arrows {
+    padding: 0 1.3vw;
+  }
+}
+.arrows__item {
+  position: relative;
+  pointer-events: auto;
+}
+.arrows__item::before {
+  content: "";
+  display: block;
+  width: 73px;
+  height: 60px;
+  background: url("../images/arrow-left.png") center center no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  -webkit-filter: brightness(20);
+          filter: brightness(20);
+  -webkit-transition: -webkit-filter 0.25s;
+  transition: -webkit-filter 0.25s;
+  -o-transition: filter 0.25s;
+  transition: filter 0.25s;
+  transition: filter 0.25s, -webkit-filter 0.25s;
+}
+@media (max-width: 1920px) {
+  .arrows__item::before {
+    width: 3.8vw;
+    height: 3.125vw;
+  }
+}
+@media (max-width: 768px) {
+  .arrows__item::before {
+    width: 9.5vw;
+    height: 7.8125vw;
+  }
+}
+.arrows__item span {
+  font-family: "Geometria";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #FFFFFF;
+  position: absolute;
+  top: 120%;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 100%;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
+  pointer-events: none;
+}
+@media (max-width: 1920px) {
+  .arrows__item span {
+    font-size: 0.83vw;
+  }
+}
+@media (max-width: 768px) {
+  .arrows__item span {
+    font-size: 2.8vw;
+    white-space: normal;
+  }
+}
+.arrows__item--prev span {
+  left: 0;
+}
+.arrows__item--next::before {
+  -webkit-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+.arrows__item--next span {
+  right: 0;
+}
+@media (min-width: 769px) {
+  .arrows__item:hover::before {
+    -webkit-filter: brightness(1);
+            filter: brightness(1);
+  }
+  .arrows__item:hover span {
+    color: #af1717;
+  }
+}
+
 @-webkit-keyframes elipsSolo {
   0% {
     -webkit-transform: translate(-50%, -40%) rotate(45deg);
